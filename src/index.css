@@ -57,6 +57,11 @@ body {
     display: none !important;
   }
 
+  .header__expandable {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
   .skill-cards {
     flex-direction: column;
     gap: 16px;
@@ -79,7 +84,16 @@ body {
   }
 
   .course-select {
+    max-width: 100%;
+  }
+
+  .course-select button {
     font-size: 16px;
+    padding-right: 24px;
+  }
+
+  .course-select__dropdown li {
+    font-size: 14px;
   }
 
   .main-content {

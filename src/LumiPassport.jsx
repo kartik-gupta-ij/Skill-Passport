@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   CertCard,
+  CourseSelect,
   CertModal,
   Header,
   InnovationCard,
@@ -44,32 +45,15 @@ export default function LumiPassport() {
       >
         {(view === "home" || view === "skill") && (
           <div className="course-select-wrap" style={{ padding: "16px 0 8px" }}>
-            <select
-              className="course-select"
+            <CourseSelect
               value={course}
-              disabled={view !== "home"}
-              onChange={(e) => {
-                setCourse(e.target.value);
+              options={COURSES}
+              onChange={(c) => {
+                setCourse(c);
                 setView("home");
               }}
-              style={{
-                border: "none",
-                background: "transparent",
-                color: view === "home" ? "#7878f4" : "rgba(159, 159, 159, 1)",
-                fontSize: 20,
-                fontWeight: 700,
-                cursor: view === "home" ? "pointer" : "default",
-                outline: "none",
-                padding: "4px 8px 4px 0",
-                maxWidth: 500,
-              }}
-            >
-              {COURSES.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
-              ))}
-            </select>
+              disabled={view !== "home"}
+            />
           </div>
         )}
 

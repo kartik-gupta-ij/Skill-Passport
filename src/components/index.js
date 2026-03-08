@@ -1,4 +1,5 @@
 export { default as CertCard } from './CertCard';
+export { default as CourseSelect } from './CourseSelect';
 export { default as CertModal } from './CertModal';
 export { default as CircleProgress } from './CircleProgress';
 export { default as Header } from './Header';

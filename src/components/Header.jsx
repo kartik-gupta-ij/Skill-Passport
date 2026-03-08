@@ -1,3 +1,6 @@
+import { useState } from "react";
+import ScoresLegendModal from "./ScoresLegendModal";
+
 const headerRowStyle = {
   display: "flex",
   alignItems: "center",
@@ -26,6 +29,8 @@ const welcomeStyle = {
 };
 
 export default function Header({ menuOpen, onMenuToggle }) {
+  const [scoresModalOpen, setScoresModalOpen] = useState(false);
+
   return (
     <header
       className="header"
@@ -46,7 +51,14 @@ export default function Header({ menuOpen, onMenuToggle }) {
               <h1 style={{ margin: 0, fontSize: 32, fontWeight: 600 }}>
                 Emily (TL A)'s Skill Passport
               </h1>
-              <span style={{ fontSize: 18, opacity: 0.7, cursor: "pointer" }}>
+              <span
+                style={{ fontSize: 18, opacity: 0.7, cursor: "pointer" }}
+                onClick={() => setScoresModalOpen(true)}
+                onKeyDown={(e) => e.key === "Enter" && setScoresModalOpen(true)}
+                role="button"
+                tabIndex={0}
+                aria-label="What the scores mean"
+              >
                 ℹ
               </span>
             </div>
@@ -79,7 +91,7 @@ export default function Header({ menuOpen, onMenuToggle }) {
           display: "flex",
           justifyContent: "flex-end",
           padding: "0px 36px",
-          paddingBottom: 20,
+          paddingBottom: menuOpen ? 0 : 20,
         }}
       >
         <span
@@ -87,10 +99,38 @@ export default function Header({ menuOpen, onMenuToggle }) {
           onClick={onMenuToggle}
           role="button"
           aria-expanded={menuOpen}
+          aria-label={menuOpen ? "Collapse info" : "Expand info"}
         >
-          ⌄
+          {menuOpen ? "⌃" : "⌄"}
         </span>
       </div>
+
+      {menuOpen && (
+        <div
+          className="header__expandable"
+          style={{
+            background: "#11102f",
+            color: "#fff",
+            padding: "24px 84px 32px",
+            fontSize: 14,
+            lineHeight: 1.6,
+          }}
+        >
+          At Lumi, we ignite potential by helping people build the skills that matter most—creative problem-solving, AI fluency, and entrepreneurial thinking. This Skill Passport is a personalised snapshot of one participant's journey through a real-world innovation challenge. It highlights how they performed, what they excelled at, and where they can grow—based on feedback, reflection, and facilitator insight. It's more than a certificate—it's a window into how someone thinks, learns, and solves problems. Learn more at{" "}
+          <a
+            href="https://www.lumi.network"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "#00E39C", textDecoration: "none", fontWeight: 600 }}
+          >
+            www.lumi.network
+          </a>
+        </div>
+      )}
+
+      {scoresModalOpen && (
+        <ScoresLegendModal onClose={() => setScoresModalOpen(false)} />
+      )}
     </header>
   );
 }
